@@ -7,6 +7,8 @@ using System;
 public class GameControl : MonoBehaviour
 {
     public static event Action HandlePulled = delegate{ };
+
+    public sfx_handle handleSound;
     
     [SerializeField]
     private Text prizeText;
@@ -36,6 +38,7 @@ public class GameControl : MonoBehaviour
     private  float betRate;
 
     private int betRate_int = 1;
+
 
 
 
@@ -71,6 +74,7 @@ public class GameControl : MonoBehaviour
         if(rows[0].rowStopped && rows[1].rowStopped && rows[2].rowStopped){
 
             if(credit >=100 * betRate_int){
+                handleSound.playHandleSound();
                 StartCoroutine("PullHandle");
                 credit = credit-100* betRate_int;
                 creditText.text="Credit: "+ credit; 
@@ -86,14 +90,14 @@ public class GameControl : MonoBehaviour
             handle.Rotate(0f,0f,i);
             yield return new WaitForSeconds(0.1f);
         }
-
+        
         HandlePulled();
 
         for(int i=0; i<15; i+=5){
             handle.Rotate(0f,0f,-i);
             yield return new WaitForSeconds(0.1f);
         }
-
+        
     }
 
     private void CheckResults()
@@ -169,6 +173,10 @@ public class GameControl : MonoBehaviour
             prizeValue = 4000;
         }
         resultsChecked = true;
+        if(prizeValue >=100)
+        {
+            handleSound.playWonPrize();
+        }
         prizeValue = prizeValue * betRate_int;
         totalPrize = totalPrize + prizeValue;
         totalPrizeText.text="Total Won Prize : "+ totalPrize;
