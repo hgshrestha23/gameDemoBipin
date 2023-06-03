@@ -5,6 +5,7 @@ using UnityEngine;
 public class Row : MonoBehaviour
 {
 
+    public sfx_slot slotAudio;
     private int randomValue;
     private float timeInterval;
 
@@ -40,7 +41,7 @@ public class Row : MonoBehaviour
             }
             transform.position = new Vector2(transform.position.x, transform.position.y-0.25f);
             // print("Y co-ordinate change" + transform.position.x);
-
+            slotAudio.playSlotSound();
             yield return new WaitForSeconds(timeInterval);
         }
         randomValue = Random.Range(60,100);
@@ -77,7 +78,7 @@ public class Row : MonoBehaviour
             if(i> Mathf.RoundToInt(randomValue*0.95f)){
                 timeInterval = 0.2f;
             }
-
+            slotAudio.playSlotSound();
             yield return new WaitForSeconds(timeInterval);
         }
 
@@ -105,7 +106,7 @@ public class Row : MonoBehaviour
         else if(transform.position.y== 2.75f){
             stoppedSlot = "Diamond";
         }
-
+        slotAudio.pauseSlotSound();
         rowStopped = true;
     }
 
