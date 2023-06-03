@@ -16,6 +16,7 @@ public class stx_bg : MonoBehaviour
         audioSource_bgAudio = GetComponent<AudioSource>();
 
         audioSource_bgAudio.clip = bgAudioClip;
+        audioSource_bgAudio.volume = 0.2f;
         audioSource_bgAudio.Play();
     }
 
@@ -27,7 +28,7 @@ public class stx_bg : MonoBehaviour
             isMuted = true;
         }else{
             print(audioSource_bgAudio.volume);
-            audioSource_bgAudio.volume = 1f;
+            audioSource_bgAudio.volume = 0.2f;
             isMuted = false;
         }
     }

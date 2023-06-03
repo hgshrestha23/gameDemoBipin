@@ -8,6 +8,8 @@ public class GameControl : MonoBehaviour
 {
     public static event Action HandlePulled = delegate{ };
 
+    public sfx_btn btn_sound;
+
     public sfx_handle handleSound;
     
     [SerializeField]
@@ -195,6 +197,7 @@ public class GameControl : MonoBehaviour
 
     public void changeBetRate()
     {
+        btn_sound.btn_pressSound();
         betRate = betSlider.value;
         betRate = betRate *100;
         betRate_int = (int) betRate;
